@@ -14,17 +14,21 @@ function App() {
 	const [cart, setCart] = useState([]);
 
 	const addItem = item => {
-		// add the given item to the cart
 		setCart(curr => [...curr, item]);
 	};
 
+	const removeItem = (index) => {
+		const newCart = Object.assign([], cart);
+		newCart.splice(index, 1);
+		setCart(newCart);
+	}
+
 	return (
-		<ProductContext.Provider value={{ products, addItem }}>
+		<ProductContext.Provider value={{ products, addItem, removeItem }}>
 			<CartContext.Provider value={cart}>
 			<div className="App">
 				<Navigation />
 
-				{/* Routes */}
 				<Route exact path="/" component={Products} />
 
 				<Route path="/cart" component={ShoppingCart} />
